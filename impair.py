@@ -1,13 +1,13 @@
 import streamlit as st
 from PIL import Image
+import pyttsx3
 import os
 import pytesseract  
 import google.generativeai as genai
 from langchain_google_genai import GoogleGenerativeAI
-import subprocess  # To call eSpeak for text-to-speech
 
 # Set Tesseract OCR path
-pytesseract.pytesseract.tesseract_cmd = r"C:\tesseractfolder\tesseract.exe"
+pytesseract.pytesseract.tesseract_cmd = r'C:\tesseractfolder\tesseract.exe'
 
 # Initialize Google Generative AI with API Key
 GEMINI_API_KEY = "AIzaSyAcLEkoCFcq8MEkAQzlC8p2els0SBYjnq0"  # Replace with your valid API key
@@ -15,12 +15,13 @@ os.environ["GOOGLE_API_KEY"] = GEMINI_API_KEY
 
 llm = GoogleGenerativeAI(model="gemini-1.5-pro", api_key=GEMINI_API_KEY)
 
-# Function to use eSpeak for text-to-speech
-def text_to_speech(text):
-    """Converts the given text to speech using eSpeak."""
-    subprocess.run(["espeak", text])  # eSpeak command to read text aloud
+# Initialize Text-to-Speech engine
+engine = pyttsx3.init()
 
-# Sidebar Features
+
+
+
+ #st.set_page_config(page_title="SightBeyond", layout="wide", page_icon="🧠")
 st.markdown(
     """
     <style>
@@ -47,10 +48,17 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-st.markdown('<div class="main-title">SightSense 👁️</div>', unsafe_allow_html=True)
-st.markdown('<div class="subtitle"> AI for Vision Impairment Assistance 🗣️</div>', unsafe_allow_html=True)
+st.markdown('<div class="main-title">SightBeyond 👁️</div>', unsafe_allow_html=True)
+st.markdown('<div class="subtitle"> AI Solutions for Empowering the Visually Impaired 🗣️</div>', unsafe_allow_html=True)
 
 # Sidebar Features
+st.sidebar.image(
+    r"C:\Users\rahul\Downloads\innomatics internship\Logo1.png",
+    width=250
+)
+
+
+# Set up the sidebar for "ℹ️ About" section with concise description
 st.sidebar.title("ℹ️ About")
 st.sidebar.markdown(
     """
@@ -65,17 +73,23 @@ st.sidebar.markdown(
     🤖 **Powered by**:
     - **Google Gemini API** for scene understanding.
     - **Tesseract OCR** for text extraction.
-    - **eSpeak** for text-to-speech.
+    - **pyttsx3** for text-to-speech.
     """
 )
 
 # Text box below the sidebar description
 st.sidebar.text_area("📜 Instructions", "Upload an image to start. Choose a feature to interact with:  1 Describe the Scene, 2 Extract Text, 3 Listen to it")
 
+
 # Functions for functionality
 def extract_text_from_image(image):
     """Extracts text from the given image using OCR."""
     return pytesseract.image_to_string(image)
+
+def text_to_speech(text):
+    """Converts the given text to speech."""
+    engine.say(text)
+    engine.runAndWait()
 
 def generate_scene_description(input_prompt, image_data):
     """Generates a scene description using Google Generative AI."""
@@ -102,7 +116,7 @@ st.markdown("<h3 class='feature-header'>📤 Upload an Image</h3>", unsafe_allow
 uploaded_file = st.file_uploader("Drag and drop or browse an image (JPG, JPEG, PNG)", type=["jpg", "jpeg", "png"])
 if uploaded_file:
     image = Image.open(uploaded_file)
-    st.image(image, caption="Uploaded Image", use_container_width=True)
+    st.image(image, caption="Uploaded Image", use_column_width=True)
 
 # Buttons Section
 st.markdown("<h3 class='feature-header'>⚙️ Features</h3>", unsafe_allow_html=True)
@@ -150,7 +164,7 @@ st.markdown(
     """
     <hr>
     <footer style="text-align:center;">
-        <p>Powered by <strong>Google Gemini API</strong> |👤 Bhavani Boddula | Built with  using Streamlit</p>
+        <p>Powered by <strong>Google Gemini API</strong> |👤Bhavani Boddula | Built with ❤️ using Streamlit</p>
     </footer>
     """,
     unsafe_allow_html=True,
@@ -160,7 +174,7 @@ st.sidebar.markdown(
     """
     <hr>
     <footer style="text-align:center;">
-        <p>Powered by <strong>Google Gemini API</strong> |👤 Bhavani Boddula | Built with  using Streamlit</p>
+        <p>Powered by <strong>Google Gemini API</strong> | 👤 Bhavani Boddula | Built with ❤️ using Streamlit</p>
     </footer>
     """,
     unsafe_allow_html=True,
