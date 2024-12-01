@@ -7,10 +7,10 @@ import google.generativeai as genai
 from langchain_google_genai import GoogleGenerativeAI
 
 # Set Tesseract OCR path
-pytesseract.pytesseract.tesseract_cmd = r'C:\tesseractfolder\tesseract.exe'
+pytesseract.pytesseract.tesseract_cmd = r"C:\tesseractfolder\tesseract.exe"
 
 # Initialize Google Generative AI with API Key
-GEMINI_API_KEY = "AIzaSyAcLEkoCFcq8MEkAQzlC8p2els0SBYjnq0"  # Replace with your valid API key
+GEMINI_API_KEY = 'AIzaSyAcLEkoCFcq8MEkAQzlC8p2els0SBYjnq0'  # Replace with your valid API key
 os.environ["GOOGLE_API_KEY"] = GEMINI_API_KEY
 
 llm = GoogleGenerativeAI(model="gemini-1.5-pro", api_key=GEMINI_API_KEY)
@@ -21,7 +21,7 @@ engine = pyttsx3.init()
 
 
 
- #st.set_page_config(page_title="SightBeyond", layout="wide", page_icon="🧠")
+ #st.set_page_config(page_title="VisionAssist", layout="wide", page_icon="🧠")
 st.markdown(
     """
     <style>
@@ -47,13 +47,13 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
-
-st.markdown('<div class="main-title">SightBeyond 👁️</div>', unsafe_allow_html=True)
-st.markdown('<div class="subtitle"> AI Solutions for Empowering the Visually Impaired 🗣️</div>', unsafe_allow_html=True)
+# Main Title
+st.markdown('<div class="main-title"> 👁️‍🗨️Visionary AI 👁️‍🗨️</div>', unsafe_allow_html=True)
+st.markdown('<div class="subtitle">Transforming Lives with AI: Real-Time Scene Understanding, Obstacle Detection, Text Reading, and Voice Guidance!</div>', unsafe_allow_html=True)
 
 # Sidebar Features
 st.sidebar.image(
-    r"C:\Users\rahul\Downloads\innomatics internship\Logo1.png",
+    r"C:\Users\anees\OneDrive\Pictures\Downloads\AI.jpeg",
     width=250
 )
 
@@ -164,7 +164,7 @@ st.markdown(
     """
     <hr>
     <footer style="text-align:center;">
-        <p>Powered by <strong>Google Gemini API</strong> |👤Bhavani Boddula | Built with ❤️ using Streamlit</p>
+        <p>Powered by <strong>Google Gemini API</strong> Built with using Streamlit</p>
     </footer>
     """,
     unsafe_allow_html=True,
@@ -174,7 +174,7 @@ st.sidebar.markdown(
     """
     <hr>
     <footer style="text-align:center;">
-        <p>Powered by <strong>Google Gemini API</strong> | 👤 Bhavani Boddula | Built with ❤️ using Streamlit</p>
+        <p>Powered by <strong>Google Gemini API</strong> Built with using Streamlit</p>
     </footer>
     """,
     unsafe_allow_html=True,
